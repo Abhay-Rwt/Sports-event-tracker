@@ -4,7 +4,7 @@ from flask_socketio import SocketIO
 
 # Import modules from the app package
 from app.utils.sports_api import get_sports_data
-from app.utils.chatbot import process_message
+from app.utils.chatbot import process_query
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -24,7 +24,7 @@ def get_events():
 def chat():
     data = request.get_json()
     message = data.get('message', '')
-    response = process_message(message)
+    response = process_query(message)
     return jsonify({'response': response})
 
 @socketio.on('connect')
