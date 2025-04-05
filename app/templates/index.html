@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Event Tracker Chatbot</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts - Using a more modern font combination -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <!-- AOS Animation library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Marked.js for markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sports-dashboard">
+            <!-- Sidebar with animated transitions -->
+            <div class="sidebar" data-aos="fade-right" data-aos-duration="800">
+                <div class="logo">
+                    <h1><i class="fas fa-bolt"></i> Sports<span>Tracker</span></h1>
+                </div>
+                <div class="filter-section">
+                    <h3><i class="fas fa-filter"></i> Filter Events</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-type="all"><i class="fas fa-globe"></i> All Sports</button>
+                        <button class="filter-btn" data-type="football"><i class="fas fa-futbol"></i> Football</button>
+                        <button class="filter-btn" data-type="basketball"><i class="fas fa-basketball-ball"></i> Basketball</button>
+                        <button class="filter-btn" data-type="cricket"><i class="fas fa-baseball-ball"></i> Cricket</button>
+                    </div>
+                </div>
+                <div class="quick-queries">
+                    <h3><i class="fas fa-bolt"></i> Quick Questions</h3>
+                    <ul>
+                        <li><a href="#" class="quick-query"><i class="fas fa-calendar-week"></i> What sports events are happening this week?</a></li>
+                        <li><a href="#" class="quick-query"><i class="fas fa-basketball-ball"></i> Show me basketball games</a></li>
+                        <li><a href="#" class="quick-query"><i class="fas fa-baseball-ball"></i> Are there any cricket matches soon?</a></li>
+                        <li><a href="#" class="quick-query"><i class="fas fa-futbol"></i> List football events</a></li>
+                    </ul>
+                </div>
+                <div class="theme-toggle">
+                    <h3><i class="fas fa-moon"></i> Theme</h3>
+                    <button id="theme-switch" class="theme-switch">
+                        <i class="fas fa-sun"></i>
+                        <span class="slider round"></span>
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <!-- Header with user greeting and date -->
+                <div class="content-header" data-aos="fade-down" data-aos-duration="800">
+                    <div class="date-display">
+                        <span id="current-date"></span>
+                    </div>
+                    <div class="user-greeting">
+                        <h2>Upcoming Sports Events</h2>
+                        <p>Find the latest updates and schedules for your favorite sports</p>
+                    </div>
+                    <div class="search-box">
+                        <input type="text" id="search-events" placeholder="Search events...">
+                        <button id="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <!-- Events section with fade-in animation -->
+                <div class="events-section" data-aos="fade-up" data-aos-duration="800">
+                    <div class="events-container">
+                        <div id="events-list" class="events-list">
+                            <!-- Events will be loaded here dynamically -->
+                            <div class="loading">
+                                <i class="fas fa-spinner fa-spin"></i> Loading events...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat section with slide-up animation -->
+                <div class="chat-section" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="chat-header">
+                        <div class="chat-title">
+                            <i class="fas fa-robot"></i> Sports Assistant
+                        </div>
+                        <button id="minimize-chat" class="minimize-btn">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message bot">
+                                <div class="message-avatar">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-time">Just now</div>
+                                    Hi there! I'm your sports event tracker assistant. Ask me about upcoming sports events, schedules for specific teams, or events for specific sports.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="user-message" placeholder="Ask about sports events...">
+                            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay for initial page load -->
+    <div class="page-loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Loading Sports Tracker...</p>
+        </div>
+    </div>
+
+    <!-- AOS Animation library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 
