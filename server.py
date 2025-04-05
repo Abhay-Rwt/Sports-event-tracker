@@ -7,7 +7,7 @@ from app.utils.sports_api import get_sports_data
 from app.utils.chatbot import process_query
 
 application = Flask(__name__)
-socketio = SocketIO(application, cors_allowed_origins="*")
+socketio = SocketIO(application, cors_allowed_origins="*", async_mode='threading')
 
 # Routes
 @application.route('/')
